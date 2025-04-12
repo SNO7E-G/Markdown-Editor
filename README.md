@@ -65,9 +65,6 @@
 
 ## 🚀 Quick Start
 
-### Online Demo
-Try it now: [Enhanced Markdown Editor Live Demo](https://sno7e-g.github.io/markdown-editor)
-
 ### Local Installation
 
 1. Clone the repository:
