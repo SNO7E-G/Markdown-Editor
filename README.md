@@ -7,8 +7,6 @@
 
 > A powerful web-based Markdown editor with real-time preview, table management, and extensive formatting options.
 
-![Markdown Editor Screenshot](screenshot.png)
-
 ## ✨ Features
 
 ### Core Functionality
