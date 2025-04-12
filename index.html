@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Markdown Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <h1>Enhanced Markdown Editor</h1>
+                <div class="header-actions">
+                    <button id="themeToggle" class="btn" aria-label="Toggle theme">
+                        <span class="theme-icon">🌞</span>
+                    </button>
+                    <button id="toggleCheatSheet" class="btn" aria-expanded="false">Help</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="toolbar">
+                <div class="toolbar-group">
+                    <button class="btn" data-format="bold" title="Bold (Ctrl+B)">B</button>
+                    <button class="btn" data-format="italic" title="Italic (Ctrl+I)">I</button>
+                    <button class="btn" data-format="strike" title="Strikethrough">S</button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="btn" data-format="h1" title="Heading 1">H1</button>
+                    <button class="btn" data-format="h2" title="Heading 2">H2</button>
+                    <button class="btn" data-format="h3" title="Heading 3">H3</button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="btn" data-format="link" title="Link (Ctrl+K)">🔗</button>
+                    <button class="btn" data-format="image" title="Image (Ctrl+Shift+K)">📷</button>
+                    <button class="btn" data-format="code" title="Code">〈/〉</button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="btn" data-format="ul" title="Unordered List">•</button>
+                    <button class="btn" data-format="ol" title="Ordered List">1.</button>
+                    <button class="btn" data-format="task" title="Task List">☐</button>
+                </div>
+                <div class="toolbar-group">
+                    <button class="btn" data-format="quote" title="Quote">❝</button>
+                    <button class="btn" data-format="hr" title="Horizontal Rule">―</button>
+                </div>
+                <div class="toolbar-group table-tools">
+                    <button class="btn" data-format="table" title="Create Table">📊</button>
+                    <div class="table-operations">
+                        <button class="btn" data-format="table-row" title="Add Row">➕ Row</button>
+                        <button class="btn" data-format="table-column" title="Add Column">➕ Col</button>
+                        <button class="btn" data-format="table-delete-row" title="Delete Row">➖ Row</button>
+                        <button class="btn" data-format="table-delete-column" title="Delete Column">➖ Col</button>
+                    </div>
+                </div>
+                <div class="toolbar-group">
+                    <button id="generateToc" class="btn" title="Generate Table of Contents">📑</button>
+                    <button id="clearInput" class="btn" title="Clear All">🗑️</button>
+                </div>
+                <div class="toolbar-group">
+                    <button id="copyMarkdown" class="btn" title="Copy Markdown">📋</button>
+                    <button id="copyHtml" class="btn" title="Copy HTML">📝</button>
+                </div>
+                <div class="toolbar-group">
+                    <button id="exportMarkdown" class="btn" title="Export Markdown">.md</button>
+                    <button id="exportHtml" class="btn" title="Export HTML">.html</button>
+                    <input type="file" id="fileInput" accept=".md,.markdown,.txt" hidden>
+                    <button id="importFile" class="btn" title="Import File">📤</button>
+                </div>
+            </div>
+
+            <div class="editor-container">
+                <section class="input-section">
+                    <div class="section-header">
+                        <h2>Editor</h2>
+                    </div>
+                    <div class="input-wrapper">
+                        <textarea id="markdownInput" placeholder="Enter your Markdown here..." spellcheck="true"></textarea>
+                    </div>
+                    <div class="section-footer">
+                        <span class="word-count">Words: 0</span>
+                        <span class="save-status">Saved ✓</span>
+                    </div>
+                </section>
+
+                <section class="preview-section">
+                    <div class="section-header">
+                        <h2>Preview</h2>
+                        <div class="preview-actions">
+                            <button id="refreshPreview" class="btn" title="Refresh Preview">🔄</button>
+                            <button id="printPreview" class="btn" title="Print Preview">🖨️</button>
+                            <button id="zoomPreview" class="btn" title="Toggle Full Preview" aria-pressed="false">
+                                <span class="icon">🔍+</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-wrapper">
+                        <div id="preview" class="markdown-body"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <aside class="cheat-sheet" hidden>
+            <div class="cheat-sheet-content">
+                <h3>Markdown Cheat Sheet</h3>
+                <button id="closeCheatSheet" class="btn close-btn" aria-label="Close cheat sheet">✕</button>
+                <div class="cheat-sheet-grid">
+                    <div class="cheat-section">
+                        <h4>Basic Syntax</h4>
+                        <ul>
+                            <li><code># Heading 1</code></li>
+                            <li><code>## Heading 2</code></li>
+                            <li><code>**Bold**</code></li>
+                            <li><code>*Italic*</code></li>
+                            <li><code>~~Strikethrough~~</code></li>
+                        </ul>
+                    </div>
+                    <div class="cheat-section">
+                        <h4>Lists</h4>
+                        <ul>
+                            <li><code>- Unordered</code></li>
+                            <li><code>1. Ordered</code></li>
+                            <li><code>- [ ] Task</code></li>
+                            <li><code>- [x] Done</code></li>
+                        </ul>
+                    </div>
+                    <div class="cheat-section">
+                        <h4>Links & Images</h4>
+                        <ul>
+                            <li><code>[Link](url)</code></li>
+                            <li><code>![Image](url)</code></li>
+                            <li><code>[Link][ref]</code></li>
+                            <li><code>[ref]: url</code></li>
+                        </ul>
+                    </div>
+                    <div class="cheat-section">
+                        <h4>Code</h4>
+                        <ul>
+                            <li><code>`Inline`</code></li>
+                            <li><code>```Block```</code></li>
+                            <li><code>```js</code></li>
+                            <li><code>    Indented</code></li>
+                        </ul>
+                    </div>
+                    <div class="cheat-section">
+                        <h4>Shortcuts</h4>
+                        <ul>
+                            <li>Ctrl+B: Bold</li>
+                            <li>Ctrl+I: Italic</li>
+                            <li>Ctrl+K: Link</li>
+                            <li>Ctrl+Shift+K: Image</li>
+                        </ul>
+                    </div>
+                    <div class="cheat-section">
+                        <h4>Other</h4>
+                        <ul>
+                            <li><code>> Quote</code></li>
+                            <li><code>---</code></li>
+                            <li><code>|Table|Header|</code></li>
+                            <li><code>[^1]: Footnote</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <div id="notifications" class="notifications" aria-live="polite"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
