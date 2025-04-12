@@ -148,7 +148,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Mahmoud Ashraf (SNO7E)**
 - GitHub: [@SNO7E-G](https://github.com/SNO7E-G)
-- LinkedIn: [Mahmoud Ashraf](https://linkedin.com/in/mahmoudashraf)
+- LinkedIn: [Mahmoud Ashraf](https://linkedin.com/in/sno7e)
 
 ## 🙏 Acknowledgments
 
